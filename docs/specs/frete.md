@@ -10,5 +10,3 @@
 *   **RB-01 (State-Driven):** **WHILE** a região selecionada for 'Norte', **THE SYSTEM SHALL** considerar R$ 300,00 como valor limite para frete grátis. Para as demais regiões, o limite é R$ 200,00.
 *   **RB-02 (Unwanted Behavior):** **IF** o valor total do carrinho for inferior ao limite da região, **THEN** **THE SYSTEM SHALL** aplicar a taxa fixa de R$ 20,00.
 *   **RB-03 (Unwanted Behavior):** **IF** o valor do carrinho for menor ou igual a R$ 0,00, **THEN** **THE SYSTEM SHALL** rejeitar a operação e exibir mensagem de erro "Valor de carrinho inválido".
-
----
