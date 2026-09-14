@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cálculo de Frete</title>
+</head>
+<body>
+    <h1>Calcular Frete</h1>
+    <form id="freteForm">
+        <input type="number" id="valor" placeholder="Valor do carrinho" required>
+        <select id="regiao" required>
+            <option value="">Selecione uma região</option>
+            <option value="Norte">Norte</option>
+            <option value="Sudeste">Sudeste</option>
+        </select>
+        <button type="submit">Calcular</button>
+    </form>
+    <div id="resultado"></div>
+
+    <script>
+        document.getElementById('freteForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const valor = document.getElementById('valor').value;
+            const regiao = document.getElementById('regiao').value;
+
+            const response = await fetch('/calcular', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({valor_carrinho: valor, regiao: regiao})
+            });
+
+            const data = await response.json();
+            document.getElementById('resultado').innerHTML = `Frete: R$ ${data.frete}`;
+        });
+    </script>
+</body>
+</html>

@@ -1,7 +1,14 @@
+from dotenv import load_dotenv
 import os
-import google.generativeai as genai
+import google.genai as genai
 
-genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
+load_dotenv()
+
+api_key = os.getenv("GEMINI_API_KEY")
+if not api_key:
+    raise ValueError("GEMINI_API_KEY não encontrada. Cria um arquivo .env com GEMINI_API_KEY=sua_chave_aqui")
+
+client = genai.Client(api_key=api_key)
 
 def ler_arquivo(caminho):
     try:
@@ -40,8 +47,10 @@ RESTRIÇÕES (REGRA DE OURO):
 
 RETORNE APENAS O CÓDIGO Python puro de `frete.py`, sem explicações."""
     
-    model = genai.GenerativeModel("gemini-2.0-flash")
-    response = model.generate_content(prompt)
+    response = client.models.generate_content(
+        model="gemini-3.6-flash",
+        contents=prompt
+    )
     
     return response.text
 
@@ -73,8 +82,10 @@ REQUISITOS:
 
 RETORNE APENAS O CÓDIGO Python puro de `app.py`, sem explicações."""
     
-    model = genai.GenerativeModel("gemini-2.0-flash")
-    response = model.generate_content(prompt)
+    response = client.models.generate_content(
+        model="gemini-3.6-flash",
+        contents=prompt
+    )
     
     return response.text
 
@@ -100,8 +111,10 @@ REQUISITOS:
 
 RETORNE APENAS O CÓDIGO HTML5 + JavaScript puro, sem explicações."""
     
-    model = genai.GenerativeModel("gemini-2.0-flash")
-    response = model.generate_content(prompt)
+    response = client.models.generate_content(
+        model="gemini-3.6-flash",
+        contents=prompt
+    )
     
     return response.text
 
